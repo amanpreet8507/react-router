@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import ImageList from './components/ImageList/ImageList';
+import Image from './components/Image/Image';
+import jsonData from './data/images.json';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+  const [arrImages, setArrImages] = useState(jsonData)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<ImageList arrImages={arrImages}
+        />}/>
+        <Route path='image/:imageId' element={<Image arrImages={arrImages}/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
